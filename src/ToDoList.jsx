@@ -10,7 +10,7 @@ function ToDoList(){
 
     function addTask(){
         if(newTask.trim() !== ""){
-            setTasks(t =>[...t, newTask]);
+            setTasks(t =>[...t, {text: newTask, completed: false}]);
             setNewTask("");
         }
     }
@@ -37,6 +37,13 @@ function ToDoList(){
         }
         
     }
+    function checkOffTask(index){
+        const updatedTasks = tasks.map((task, i) =>
+        i === index ? {...task, completed: !task.completed} : task
+    );
+    setTasks(updatedTasks);
+
+    }
 
     return (
     <div className='to-do-list'>
@@ -56,8 +63,17 @@ function ToDoList(){
         </div>
         <ol>
          {tasks.map((task, index) =>
-            <li key={index}>
-                <span className="text">{task}</span>
+            <li key={index}
+            style={{
+                textDecoration: task.completed ? "line-through" : "none",
+                backgroundColor: task.completed ? "#d3f9d8": "white",
+            }}>
+                <span className="text">{task.text}</span>
+                <button
+                className='check-button'
+                onClick={() => checkOffTask(index)}>
+                <i className="fa-solid fa-check"></i>
+                </button>
                 <button
                 className='delete-button'
                 onClick={() => deleteTask(index)}>

@@ -67,6 +67,9 @@ button{
 .delete-button:hover{
   background-color: #C2E1FF;
 }
+.check-button{
+  background-color: #80ED99
+}
 ol{
   padding: 0;
 }
